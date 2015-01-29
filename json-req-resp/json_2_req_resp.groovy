@@ -53,19 +53,21 @@ def getTypeFromWholePath(key, value){
 			listSubType = getTypeFromWholePath("", value[0])
 			return "ArrayList<$listSubType>"
 		case 'class groovy.json.internal.LazyMap':
-
-			return 'Object';
+			println "$key -- ${key.getClass()}"
+			objectType = key.capitalize();
+			return objectType;
+			//return 'Object'
 	}
 }
 
 def parseJson2RequestFileContent(){
 	sb = new StringBuilder()
-	sb<<"package com.mycompany.requests;$lineSeparator"
+	sb<<"package com.netease.epay.requests;$lineSeparator"
 	sb<<"$lineSeparator"
 
-	sb<<"import com.mycompany.common.async_http.AbstractParser;$lineSeparator"
-	sb<<"import com.mycompany.common.async_http.AbstractRequester;$lineSeparator"
-	sb<<"import com.mycompany.common.net.HttpRequestData;$lineSeparator"
+	sb<<"import com.common.async_http.AbstractParser;$lineSeparator"
+	sb<<"import com.common.async_http.AbstractRequester;$lineSeparator"
+	sb<<"import com.common.net.HttpRequestData;$lineSeparator"
 	sb<<"$lineSeparator"
 
 	sb<<"public class ${basicFileName}Request extends AbstractRequester {$lineSeparator"
@@ -91,12 +93,12 @@ def parseJson2RequestFileContent(){
 
 def parseJson2ParserFileContent(){
 	sb = new StringBuilder()
-	sb<<"package com.mycompany.requests;$lineSeparator"
+	sb<<"package com.netease.epay.requests;$lineSeparator"
 	sb<<"$lineSeparator"
 
-	sb<<"import com.mycompany.common.async_http.AbstractParser;$lineSeparator"
-	sb<<"import com.mycompany.common.async_http.BaseResponse;$lineSeparator"
-	sb<<"import com.mycompany.parser.ResponseParser;$lineSeparator"
+	sb<<"import com.common.async_http.AbstractParser;$lineSeparator"
+	sb<<"import com.common.async_http.BaseResponse;$lineSeparator"
+	sb<<"import com.netease.epay.parser.ResponseParser;$lineSeparator"
 	sb<<"$lineSeparator"
 
 	sb<<"public class ${parserName} extends AbstractRequester {$lineSeparator"
@@ -119,10 +121,10 @@ def parseJson2ParserFileContent(){
 
 def parseJson2ResponseFileContent(){
 	sb = new StringBuilder()
-	sb<<"package com.mycompany.requests;$lineSeparator"
+	sb<<"package com.netease.epay.requests;$lineSeparator"
 	sb<<"$lineSeparator"
 
-	sb<<"import com.mycompany.common.async_http.BaseResponse;$lineSeparator"
+	sb<<"import com.common.async_http.BaseResponse;$lineSeparator"
 	sb<<"import java.util.ArrayList;$lineSeparator"
 	sb<<"import org.json.JSONArray;$lineSeparator"
 	sb<<"import org.json.JSONException;$lineSeparator"
@@ -142,23 +144,40 @@ def parseJson2ResponseFileContent(){
 	sb<<"\t\t\t\tJSONObject json = new JSONObject(jsonStr);$lineSeparator"
 	ajson.each{key, value ->
 		def type = getTypeFromWholePath(key, value)
+
 		if (type.startsWith("ArrayList")){
 			def subtype = ""
 			def pattern = ~/ArrayList<(.*)>/
 			type.find(pattern){
 				subtype = it[1]
 			}
+			sb<<"$lineSeparator"
 			sb<<"\t\t\t\tJSONArray array = json.optJSONArray(\"$key\");$lineSeparator"
 			sb<<"\t\t\t\t$key = new $type();$lineSeparator"
 			sb<<"\t\t\t\tfor(int i = 0; i < array.length(); i++){$lineSeparator"
 			sb<<"\t\t\t\t\t$subtype asub = ($subtype) array.opt(i);$lineSeparator"
 			sb<<"\t\t\t\t\tlist.add(asub);$lineSeparator"
 			sb<<"\t\t\t\t}$lineSeparator"
-		} else if(type.startsWith("Object")){
+			sb<<"$lineSeparator"
+		} 
 
-		} else {
+
+		else if(type.equals("long") || type.equals("int")
+			|| type.equals("String") || type.equals("boolean")){
 			type = type.capitalize()
-			sb<<"\t\t\t\t$key = json.opt${type}(\"$key\");$lineSeparator"
+			sb<<"\t\t\t\t$key = json.opt${type}(\"$key\");$lineSeparator"			
+		} 
+
+
+		else {
+			//create the Item's JavaBean
+			writeItemData2File(key,value)
+
+			//add lines to File
+			sb<<"$lineSeparator"
+			sb<<"\t\t\t\tJSONObject sub = json.optJSONObject(\"${key}\");$lineSeparator"
+			sb<<"\t\t\t\t$key = new $type(sub);$lineSeparator"
+			sb<<"$lineSeparator"
 		}
 	}
 	sb<<"\t\t\t} catch (JSONException e) {$lineSeparator"
@@ -168,5 +187,10 @@ def parseJson2ResponseFileContent(){
 	sb<<"\t}$lineSeparator"
 	sb<<"$lineSeparator"	
 	sb<<"}$lineSeparator"
+}
+
+
+def writeItemData2File(fkey, fvalue){
+	
 }
 

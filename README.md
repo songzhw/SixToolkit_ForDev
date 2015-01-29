@@ -2,7 +2,7 @@
 Some tools that I used in Android Developing or life
 
 
-## 1. Json2Request
+## 1. Json2Request ( !!! Not finished. Still working... !!! )
 read a json, and parse it to java classes : **Request, **Parser, **Response
 
 ### 1.1 usage

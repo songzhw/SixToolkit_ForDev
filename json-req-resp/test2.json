@@ -2,6 +2,9 @@
     "a": 1,
     "b": "300.30",
     "c": "222.30",
-    "e": "balance",
-    "f": false
+    "e": false,
+    "f": [
+    {"fa":1, "fb":true},
+    {"fa":2, "fb":false}
+    ]
 }
