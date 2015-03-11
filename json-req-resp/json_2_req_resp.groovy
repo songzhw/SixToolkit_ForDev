@@ -3,6 +3,7 @@ import groovy.json.JsonSlurper
 //========== !!! test2.json里不能带中文 !!! =============
 //========== !!! test2.json里不能带中文 !!! =============
 //========== !!! test2.json里不能带中文 !!! =============
+
 basicFileName = 'HomePage'
 // api中要求带的action。 
 requestAction = 'getHomePage'
@@ -56,11 +57,14 @@ def getTypeFromWholePath(key, value){
 			return 'int';
 		case 'class java.util.ArrayList':
 			listSubClass = value[0].getClass()
+			//println "getType() : ArrayList : listSubClass = $listSubClass"
 			listSubType = getTypeFromWholePath("${key}Item", value[0])
 			return "ArrayList<$listSubType>"
 		case 'class groovy.json.internal.LazyMap':
+			//println "$key -- ${key.getClass()}"
 			objectType = key.capitalize();
 			return objectType;
+			//return 'Object'
 	}
 }
 
