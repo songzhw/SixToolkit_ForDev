@@ -15,4 +15,8 @@ groovy json_2_req_resp.groovy
 Ok, now we have the java classes
 <p>
 	
+## 1.2 NOTE
+this json2Request tool has a strong connnection with the network framework in your app. 
+different projects may have to adjust some code to generate the right Request/Response java class.
+
 ## 2. 

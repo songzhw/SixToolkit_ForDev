@@ -1,7 +1,13 @@
 import groovy.json.JsonSlurper
 
-basicFileName = 'Simple'
-requestName = "${basicFileName}Resquest"
+//========== !!! test2.json里不能带中文 !!! =============
+//========== !!! test2.json里不能带中文 !!! =============
+//========== !!! test2.json里不能带中文 !!! =============
+basicFileName = 'HomePage'
+// api中要求带的action。 
+requestAction = 'getHomePage'
+
+requestName = "${basicFileName}Request"
 parserName  = "${basicFileName}Parser"
 responseName = "${basicFileName}Response"
 requestFileName =  "${requestName}.java"
@@ -50,14 +56,11 @@ def getTypeFromWholePath(key, value){
 			return 'int';
 		case 'class java.util.ArrayList':
 			listSubClass = value[0].getClass()
-			//println "getType() : ArrayList : listSubClass = $listSubClass"
-			listSubType = getTypeFromWholePath("${key}OneItem", value[0])
+			listSubType = getTypeFromWholePath("${key}Item", value[0])
 			return "ArrayList<$listSubType>"
 		case 'class groovy.json.internal.LazyMap':
-			//println "$key -- ${key.getClass()}"
 			objectType = key.capitalize();
 			return objectType;
-			//return 'Object'
 	}
 }
 
@@ -76,9 +79,9 @@ def parseJson2RequestFileContent(){
 
 	sb<<"\t@Override"<<lineSeparator
 	sb<<"\tprotected HttpRequestData createSendData() {"<<lineSeparator
-	sb<<"\t\tNTESEpayRequestData request = new NTESEpayRequestData();"<<lineSeparator
-	sb<<"\t\trequest.setAction(\"\");"<<lineSeparator
-	sb<<"\t\t//request.addRequest()"<<lineSeparator
+	sb<<"\t\tMyRequestData request = new MyRequestData();"<<lineSeparator
+	sb<<"\t\trequest.setAction(\"$requestAction\");"<<lineSeparator
+	sb<<"\t\t//request.addParam(key, value);"<<lineSeparator
 	sb<<"\t\treturn request;"<<lineSeparator
 	sb<<"\t}"<<lineSeparator
 	sb<<lineSeparator
@@ -99,7 +102,6 @@ def parseJson2ParserFileContent(){
 
 	sb<<"import com.mycompany.common.async_http.AbstractParser;"<<lineSeparator
 	sb<<"import com.mycompany.common.async_http.BaseResponse;"<<lineSeparator
-	sb<<"import com.mycompany.parser.ResponseParser;"<<lineSeparator
 	sb<<lineSeparator
 
 	sb<<"public class ${parserName} extends ResponseParser {"<<lineSeparator
@@ -119,7 +121,7 @@ def parseJson2ParserFileContent(){
 	sb<<"}"<<lineSeparator	
 }
 
-
+//自定义的类，这里可能会没有import的情况。 这时因为进入类里了才知道要import什么类进来。这个可能要手动加下。
 def parseJson2ResponseFileContent(){
 	sb = new StringBuilder()
 	sb<<"package com.mycompany.requests;"<<lineSeparator
@@ -141,6 +143,7 @@ def parseJson2ResponseFileContent(){
 	sb<<lineSeparator
 
 	sb<<"\tpublic $responseName (String jsonStr){"<<lineSeparator
+	sb<<"\t\tsuper(jsonStr);"<<lineSeparator
 	sb<<"\t\tif(!TextUtils.isEmpty(jsonStr)){"<<lineSeparator
 	sb<<"\t\t\ttry{"<<lineSeparator		
 	sb<<"\t\t\t\tJSONObject json = new JSONObject(jsonStr);"<<lineSeparator
@@ -175,9 +178,6 @@ def parseJson2ResponseFileContent(){
 				sb<<"\t\t\t\t"<<lineSeparator
 
 			}
-			sb<<lineSeparator
-			
-
 
 		} 
 
