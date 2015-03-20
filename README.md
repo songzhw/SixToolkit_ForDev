@@ -33,9 +33,9 @@ would be named :
 ```java
 private TextView tvBankName;
 ```
-*  if the id of view starts with "_x", it means it will not be listed as a member in Class
-* if the id of view starts with "_c", it means it will be listed as a member in Class, and it will be add the OnClickListener
-* "android:id" should be the first attribute of a View in the layout xml file
+*  if the id of view ends with "_x", it means it will not be listed as a member in Class
+* if the id of view ends with "_c", it means it will be listed as a member in Class, and it will be add the OnClickListener
+* ```xml "android:id" ``` should be the first attribute of a View in the layout xml file
 
 ## 1.2 usage
 1. paste your layout xml content to "layout.xml"
