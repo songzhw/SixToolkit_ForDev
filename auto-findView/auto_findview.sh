@@ -1,0 +1,1 @@
+groovy auto_findview.groovy
