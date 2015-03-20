@@ -24,7 +24,15 @@ different projects may have to adjust some code to generate the right Request/Re
 ## 2. AutoFindViewById
 
 ## 1.1 rules
-* the id of view should be "view_page_function". And the name of class member would be like "viewFunction". For example: <TextView android:id="@+id/tv_pay_bank_name" ... /> would be named : private TextView tvBankName;
+* the id of view should be "view_page_function". And the name of class member would be like "viewFunction". <br/>
+For example: <br/>
+```xml
+<TextView android:id="@+id/tv_pay_bank_name" ... /> 
+```
+would be named :
+```java
+private TextView tvBankName;
+```
 *  if the id of view starts with "_x", it means it will not be listed as a member in Class
 * if the id of view starts with "_c", it means it will be listed as a member in Class, and it will be add the OnClickListener
 * "android:id" should be the first attribute of a View in the layout xml file
