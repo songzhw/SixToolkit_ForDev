@@ -1,0 +1,31 @@
+private Button btnPay;
+private Button btnCancel;
+private Button btnSendSms;
+private TextView tvBankError;
+private EditText etInputPwd;
+
+etInputPwd = (EditText) findViewById(R.id.et_pay_input_pwd);
+tvBankError = (TextView) findViewById(R.id.tv_pay_bank_error);
+btnSendSms = (Button) findViewById(R.id.btn_pay_send_sms_c);
+btnSendSms.setOnClickListener(this);
+btnCancel = (Button) findViewById(R.id.btn_pay_cancel_c);
+btnCancel.setOnClickListener(this);
+btnPay = (Button) findViewById(R.id.btn_pay_pay_c);
+btnPay.setOnClickListener(this);
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+			case R.id.btn_pay_send_sms_c:
+				
+				break;
+			case R.id.btn_pay_cancel_c:
+				
+				break;
+			case R.id.btn_pay_pay_c:
+				
+				break;
+			default:
+				break;
+		}
+	}

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/pay_selector_width"
+    android:layout_height="262dp" 
+    >
+    
+    <EditText android:id="@+id/et_pay_input_pwd"
+        android:layout_width="fill_parent"
+        android:layout_height="41dp"
+        android:background="@drawable/bg_edittext_white_shape"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/tv_pay_switch_payment_c"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        />
+    
+    <TextView
+        android:id="@+id/tv_pay_bank_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_pay_input_pwd"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="26dp"
+        android:paddingRight="26dp"
+        android:textSize="16dp"
+        android:textColor="#f15644"
+        android:text="Error Messages"
+        android:visibility="gone" 
+        />
+        
+    <Button android:id="@+id/btn_pay_send_sms_c"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_below="@id/tv_pay_bank_error"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="18dp"
+        android:textColor="#000"
+        android:text="Click"
+        android:visibility="gone" 
+        />
+    
+    <LinearLayout android:id="@+id/llay_bottom_two_button_x"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/divider_bottom_two_button"
+        android:orientation="horizontal" 
+        >
+
+        <Button
+            android:id="@+id/btn_pay_cancel_c"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:textSize="17dp"
+            android:text="Cancel"
+            android:textColor="#000"
+            />
+        <View android:id="@+id/divider_dialog_vertical_x"
+            android:layout_width="1px"
+            android:layout_height="fill_parent"
+            android:background="#b3b3b3"
+            />
+        <Button
+            android:id="@+id/btn_pay_pay_c"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:textSize="17dp"
+            android:text="Pay"
+            android:textColor="#007aff" 
+            />
+    </LinearLayout>
+    
+</RelativeLayout>

@@ -11,12 +11,25 @@ read a json, and parse it to java classes : **Request, **Parser, **Response
 ```groovy
 groovy json_2_req_resp.groovy
 ```
-<p>
+<br/>
 Ok, now we have the java classes
-<p>
+
 	
 ## 1.2 NOTE
-this json2Request tool has a strong connnection with the network framework in your app. 
-different projects may have to adjust some code to generate the right Request/Response java class.
+this json2Request tool has a strong connnection with the network framework in your app. <br/>
+different projects may have to adjust some code to generate the right Request/Response java class.<br/>
+<br/><br/>
 
-## 2. 
+
+## 2. AutoFindViewById
+
+## 1.1 rules
+* the id of view should be "view_page_function". And the name of class member would be like "viewFunction". For example: <TextView android:id="@+id/tv_pay_bank_name" ... /> would be named : private TextView tvBankName;
+*  if the id of view starts with "_x", it means it will not be listed as a member in Class
+* if the id of view starts with "_c", it means it will be listed as a member in Class, and it will be add the OnClickListener
+* "android:id" should be the first attribute of a View in the layout xml file
+
+## 1.2 usage
+1. paste your layout xml content to "layout.xml"
+2. run the "auto_findview.bat"
+
