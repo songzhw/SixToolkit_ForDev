@@ -1,0 +1,20 @@
+{
+    "operationResp": "000000",
+    "detailMsg": "a",
+    "accountState": "NORMAL",
+    "identifyState": "IDENTIFIED",
+    "balanceInfo": {
+        "amount": "99.99",
+        "useable": "USEABLE"
+    },
+    "cardInfos": [
+        {
+            "bankId": "0150",
+            "bankName": "a",
+            "cardNoTail": "1234",
+            "cardType": "debit",
+            "quickPayId": "2015052511QP85304182",
+            "useable": "USEABLE"
+        }
+    ]
+}

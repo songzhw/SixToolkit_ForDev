@@ -69,3 +69,8 @@ public void onClick(View v) {
 
 ```
 All you have to do is copy these lines to you own Activity file
+
+## 3. json->Response
+	the short version of the first one(json2ReqRespParser)
+
+	
