@@ -1,6 +1,6 @@
 import groovy.io.FileType
 
-def blackDir = ['build', 'gradle','result']
+def blackDir = ['build', 'gradle','result','.git','.idea','.gradle']
 
 def whiteFile = ['java','kt','xml','groovy','rb','py','bat','sh','md','gradle']
 
@@ -20,19 +20,30 @@ root.listFiles().each{ File file ->
 
 
 // 2. starts to record files in the root directory
-root.listFiles().each{
-	if(!it.isDirectory()){
-		files.add(it)
+root.listFiles().each{ File aFile -> 
+	if(!aFile.isDirectory()){
+		if(whiteFile.any { String suffix -> aFile.name.endsWith(suffix)}) {
+			files.add(aFile)
+		}
 	}
 }
 
 // 3. starts to record files in the while list files
 dirs.each{ File aDir ->
-	aDir.eachFileRecurse(FileType.FILES) { File file ->
-		files.add(file)
+	aDir.eachFileRecurse(FileType.FILES) { File aFile ->
+		if(whiteFile.any { String suffix -> aFile.name.endsWith(suffix)}) {
+			files.add(aFile)
+		}
 	}
 }
 
 
 int lines = 0
-files.each{println it.name}
+files.each{ File aFile ->
+	aFile.eachLine{ String aLine ->
+		if( aLine != ''){ lines++ }
+	}
+}
+
+println("lines = $lines")
+

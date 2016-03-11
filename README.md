@@ -74,3 +74,5 @@ All you have to do is copy these lines to you own Activity file
 	the short version of the first one(json2ReqRespParser)
 
 	
+## 4. Count line
+It's a tool that count the lines of code. It's not for SVN, and it's only for my own project.
