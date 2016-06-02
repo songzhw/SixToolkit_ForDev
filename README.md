@@ -76,3 +76,8 @@ All you have to do is copy these lines to you own Activity file
 	
 ## 4. Count line
 It's a tool that count the lines of code. It's not for SVN, and it's only for my own project.
+
+## Note
+If you are using kotlin, that's fine. You can invoke [Find Action](https://www.jetbrains.com/help/idea/2016.1/navigating-to-action.html?origin=old_help) and find "convert Java File to Kotlin" action, then use it. After the conversion, we should have an class written in Kotlin.
+
+![](/images/convert2kotlin.png)
