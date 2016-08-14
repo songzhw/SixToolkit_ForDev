@@ -81,3 +81,11 @@ It's a tool that count the lines of code. It's not for SVN, and it's only for my
 If you are using kotlin, that's fine. You can invoke [Find Action](https://www.jetbrains.com/help/idea/2016.1/navigating-to-action.html?origin=old_help) and find "convert Java File to Kotlin" action, then use it. After the conversion, we should have an class written in Kotlin.
 
 ![](/images/convert2kotlin.png)
+
+## 5. Android Studio's Activity Template -- RecyclerViewActivity Template
+This will help you generate new Activities. 
+
+### How do I use it?
+just put it into the directory:
+
+`%your Android Studio dir%\plugins\android\lib\templates\activities\`
