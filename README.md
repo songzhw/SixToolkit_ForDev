@@ -27,7 +27,7 @@ the script will auto generate three java classes: **Request, **Parser, **Respons
 
 ## 2. AutoFindViewById
 
-## 2.1 rules
+### 2.1 rules
 * the id of view should be "view_page_function". And the name of class member would be like "viewFunction". <br/>
 For example: <br/>
 ```xml
@@ -41,11 +41,11 @@ private TextView tvBankName;
 * if the id of view ends with ```"_c"```, it means it will be listed as a member in Class, and it will be add the OnClickListener
 * ``` "android:id" ``` should be the first attribute of a View in the layout xml file
 
-## 2.2 usage
+### 2.2 usage
 1. paste your layout xml content to "layout.xml"
 2. run the "auto_findview.bat",  or "auto_findview.bat"
 
-## 2.3 result
+### 2.3 result
 ```java
 private Button btnSendSms;
 private TextView tvBankError;
@@ -69,6 +69,12 @@ public void onClick(View v) {
 
 ```
 All you have to do is copy these lines to you own Activity file
+
+### 2.4 xml -> Adapter
+~~This tool is similar with the "AutoFindViewById" tool. You input the layout xml, and it will generate the class file of Adapter for you.~~
+This tool is also useful for `xml -> Adapter`. However, it will generate different Adapter class for you. But **this tool is deprecated**. 
+
+Now, you only have to use the [OneAdapter](https://github.com/SixCan/AndroidAbove5/tree/master/SupportDemo/app/src/main/java/cn/six/sup/rv/one_adapter) tool I wrote for RecyclerView. It's more convinent than this tool. 
 
 ## 3. json->Response
 	the short version of the first one(json2ReqRespParser)
