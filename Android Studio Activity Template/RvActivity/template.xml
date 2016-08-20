@@ -20,20 +20,12 @@
         help="The name of the activity class to create" />
 
     <parameter
-        id="generateLayout"
-        name="Generate Layout File"
-        type="boolean"
-        default="true"
-        help="If true, a layout file will be generated" />
-
-    <parameter
         id="layoutName"
         name="Layout Name"
         type="string"
         constraints="layout|unique|nonempty"
         suggest="${activityToLayout(activityClass)}"
         default="activity_main"
-        visibility="generateLayout"
         help="The name of the layout to create for the activity" />
 
     <parameter
@@ -43,14 +35,7 @@
         constraints="layout|unique|nonempty"
         default="item_rv_main"
         help="The name of items for RecyclerView" />    
-
-    <parameter
-        id="isLauncher"
-        name="Launcher Activity"
-        type="boolean"
-        default="false"
-        help="If true, this activity will have a CATEGORY_LAUNCHER intent filter, making it visible in the launcher" />
-    
+   
     <parameter
         id="packageName"
         name="Package name"
