@@ -33,6 +33,7 @@
         name="Item Layout Name"
         type="string"
         constraints="layout|unique|nonempty"
+        suggest="item_${activityToLayout(activityClass)?substring(9)}"
         default="item_rv_main"
         help="The name of items for RecyclerView" />    
    
