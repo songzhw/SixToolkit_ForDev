@@ -6,10 +6,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import cn.six.sup.rv.RvViewHolder;
 import cn.six.sup.rv.OnRvItemClickListener;
 import cn.six.sup.rv.one_adapter.OneAdapter;
+import cn.six.sup.rv.header.HeaderWrapper;
 
 <#if applicationPackage??>
 import ${applicationPackage}.R;
@@ -19,6 +22,9 @@ public class ${activityClass} extends ${superClass} {
 	private RecyclerView rv;
 	private OneAdapter<${itemType}> adapter;
 	private List<${itemType}> data;
+    <#if isUsingHeader>
+    private HeaderWrapper headerWrapper;
+    </#if>
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +42,19 @@ public class ${activityClass} extends ${superClass} {
             }
         };
         adapter.data = data;
+        <#if isUsingHeader>
+        
+        LayoutInflater inflater = this.getLayoutInflater();
+        View headView = inflater.inflate(R.layout.${itemLayoutName}, null); // TODO change head layout
+        headerWrapper = new HeaderWrapper(adapter);
+        headerWrapper.headerView = headView;
+        rv.setAdapter(headerWrapper);
+        <#else>
         rv.setAdapter(adapter);
+        </#if>
+
+
+        
 
         rv.addOnItemTouchListener(new OnRvItemClickListener(rv) {
             @Override
@@ -44,7 +62,12 @@ public class ${activityClass} extends ${superClass} {
 
             @Override
             public void onItemClick(RecyclerView.ViewHolder vh) {
-                
+
+                <#if isUsingHeader>
+                headerWrapper.notifyDataSetChanged();
+                <#else>
+                adapter.notifyDataSetChanged();
+                </#if>
             }
         });
 

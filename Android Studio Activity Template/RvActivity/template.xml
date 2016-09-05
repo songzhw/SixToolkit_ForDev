@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <template
-    format="5"
-    revision="5"
+    format="3"
+    revision="4"
     name="RecyclerView Activity"
     minApi="15"
     minBuildApi="15"
@@ -49,7 +49,15 @@
         name="Item type"
         type="string"
         constraints="class|nonempty"
-        default="String" />        
+        default="String" />  
+
+    <parameter
+        id="isUsingHeader"
+        name="use header?"
+        type="boolean"
+        default="false"
+        />
+
 
     <!-- 128x128 thumbnails relative to template.xml -->
     <thumbs>
