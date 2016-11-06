@@ -7,6 +7,8 @@ coreName = "OrderCancel"
 filePath = "E:/tmp"
 viewType = "Fragment" // option: Fragment, View, Activity  // TODO -> enum
 
+// separated by ";"
+viewMethods = "showOrder;afterCancelOrder;goBack"
 
 // 1.2  argument that you should not change
 lineSeparator = System.getProperty("line.separator");
@@ -40,7 +42,19 @@ def write2File(fileFullName, content){
 // 2.1 generate IView
 def generateIView() {
     sb = new StringBuilder()
-    sb <<"001"
+
+    // package
+    add("package $pkgName;")
+    addEmptyLine()
+
+    add("public interface I${coreName}View {")
+
+    methods = viewMethods.split(";")
+    methods.each { aMethod ->
+        add1("void $aMethod();")
+    }
+
+    add("}")
 }
 
 
@@ -58,7 +72,24 @@ def generatePresenter() {
 }
 
 
+
+
 // ===================== 3. put the files in the right position =====================
 
+
+
+// ===================== 4. utils =====================
+
+def addEmptyLine(){
+    sb << lineSeparator
+}
+
+def add(content){
+    sb << content << lineSeparator
+}
+
+def add1(content){
+    sb << "\t" << content << lineSeparator
+}
 
 
