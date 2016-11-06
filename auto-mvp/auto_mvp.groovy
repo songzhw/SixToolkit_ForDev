@@ -1,7 +1,8 @@
 /**@author songzhw */
 
 // TODO 1. viewType -> enum
-// TODO 2. viewType -> generate Activity, Fragment's detail
+// TODO 2. view's CF : add the initilization of Presenter
+// TODO 3. viewType -> generate Activity, Fragment's detail
 
 // ===================== 1. set basic argumetns =====================
 // 1.1  argument that you may want to chagne
@@ -11,7 +12,7 @@ filePath = "E:/tmp"
 viewType = "Fragment" // option: Fragment, View, Activity  // TODO -> enum
 
 // separated by ";"
-viewMethods = "showOrder;afterCancelOrder;goBack"
+viewMethods = "showOrder;afterCancelOrder;afterRefresh"
 
 // 1.2  argument that you should not change
 lineSeparator = System.getProperty("line.separator");
@@ -90,7 +91,37 @@ def generateView() {
 // 2.3 generate Presenter (,which contains CommonHttpPresenter, restService, Callback)
 def generatePresenter() {
     sb = new StringBuilder()
-    sb <<"003"
+    add("package $pkgName;")
+    addEmptyLine()
+
+    add("public class ${coreName}Presenter {")
+    addEmptyLine()
+
+    // fields
+    add1("private I${coreName}View view;")
+    add1("private CommonHttpPresenter httpDelegate;")
+    addEmptyLine()
+
+    // constructor
+    add1("public ${coreName}Presenter(I${coreName}View view) {")
+    add2("this.view = view;")
+    addEmptyLine()
+    add2("httpDelegate = new CommonHttpPresenter();")
+    add1("}")
+    addEmptyLine()
+
+    // methods
+    methods = viewMethods.split(";")
+    methods.each { method ->
+        add1("public void $method() {")
+        add2("")
+        add1("}")
+        addEmptyLine()
+    }
+
+    // TODO add http callback
+
+    add("}")
 }
 
 
