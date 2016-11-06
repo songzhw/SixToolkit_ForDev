@@ -1,5 +1,8 @@
 /**@author songzhw */
 
+// TODO 1. viewType -> enum
+// TODO 2. viewType -> generate Activity, Fragment's detail
+
 // ===================== 1. set basic argumetns =====================
 // 1.1  argument that you may want to chagne
 pkgName = "ca.six.demo"
@@ -58,11 +61,30 @@ def generateIView() {
 }
 
 
+
+
 // 2.2 generate View
 def generateView() {
     sb = new StringBuilder()
-    sb <<"002"
+    add("package $pkgName;")
+    addEmptyLine()
+
+    add("public class ${coreName}${viewType} implements I${coreName}View {")
+    addEmptyLine()
+
+    methods = viewMethods.split(";")
+    methods.each { method ->
+        add1("@Override")
+        add1("public void $method() {")
+        add2("")
+        add1("}")
+        addEmptyLine()
+    }
+
+    add("}")
 }
+
+
 
 
 // 2.3 generate Presenter (,which contains CommonHttpPresenter, restService, Callback)
@@ -90,6 +112,10 @@ def add(content){
 
 def add1(content){
     sb << "\t" << content << lineSeparator
+}
+
+def add2(content){
+    sb << "\t\t" << content << lineSeparator
 }
 
 
