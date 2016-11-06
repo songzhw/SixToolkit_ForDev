@@ -95,3 +95,6 @@ This will help you generate new Activities.
 just put it into the directory:
 
 `%your Android Studio dir%\plugins\android\lib\templates\activities\`
+
+##5. Auto-MVP
+generate MVP class for you. 
