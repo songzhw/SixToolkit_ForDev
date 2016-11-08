@@ -1,0 +1,2 @@
+groovy del_unused_res.groovy
+pause
