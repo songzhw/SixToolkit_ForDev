@@ -96,9 +96,9 @@ just put it into the directory:
 
 `%your Android Studio dir%\plugins\android\lib\templates\activities\`
 
-##5. Auto-MVP
+## 5. Auto-MVP
 generate MVP class for you. 
 
 
-##6. Auto-Delete-Unused-Resource
+## 6. Auto-Delete-Unused-Resource
 you may have loads of unused resouces after so many iterations. This tool will remove all the unused resouces for you. All you have to do is just set arguments and double click a executable file!
