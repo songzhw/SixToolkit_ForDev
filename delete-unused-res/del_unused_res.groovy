@@ -23,6 +23,9 @@ axml.issue.each {
     println it.location.@file
 }
 
+axml.issue.location.each {
+    println "location = ${it.@file}"
+}
 
 
 // ===================== 3. run lint =====================
