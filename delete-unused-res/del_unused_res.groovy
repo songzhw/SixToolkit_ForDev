@@ -15,10 +15,12 @@ projectPath = 'E:/workspace/mine/SixTools'
 lintResultXmlFile = "C:/Users/songz2/temp/lint-results-temp.xml"
 
 def axml = new XmlParser().parse(lintResultXmlFile)
-println "lint.by = ${axml.attribute("by")}"
 
 axml.issue.each {
-    println it.attribute("id")
+    println ("- - - - - - - - - - - - ")
+    println "type = ${it.@id}"
+    println it.@message
+    println it.location.@file
 }
 
 
