@@ -53,6 +53,15 @@ axml.issue.findAll { it.@id == "UnusedResources"}
 
 // http://stackoverflow.com/questions/224926/how-to-insert-move-delete-nodes-in-xml-with-groovy
 
+def tmpXml = new XmlParser().parse("res/colors.xml")
+def colors = tmpXml.children()
+def toBeDeleted = colors.find { it.@name == 'pinkE56E98' }
+colors.remove(toBeDeleted) // remove the nodes from list, not file
+
+new XmlNodePrinter().print(tmpXml)
+
+
+
 // ===================== 3. run lint =====================
 
 
