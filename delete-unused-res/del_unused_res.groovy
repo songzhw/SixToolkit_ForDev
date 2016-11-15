@@ -44,7 +44,6 @@ axml.issue.findAll { it.@id == "UnusedResources"}
 
 		def filePath = new File( it.location.@file[0] ) 
 		def resXmlParser = new XmlParser().parse(filePath)
-		println resXmlParser.children()[0].@name
 		resXmlParser.children().findAll { resItem ->
 			resItem.@name == resName
 		}.each{ item -> 
@@ -52,6 +51,7 @@ axml.issue.findAll { it.@id == "UnusedResources"}
 		}
 	}
 
+// http://stackoverflow.com/questions/224926/how-to-insert-move-delete-nodes-in-xml-with-groovy
 
 // ===================== 3. run lint =====================
 
