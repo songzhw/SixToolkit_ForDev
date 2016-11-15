@@ -12,20 +12,25 @@ projectPath = 'E:/workspace/mine/SixTools'
 // commandLint.execute(null, new File(projectPath))
 
 
-lintResultXmlFile = "C:/Users/songz2/temp/lint-results-temp.xml"
+lintResultXmlFile = "res/lint_01.xml"
 
 def axml = new XmlParser().parse(lintResultXmlFile)
 
-axml.issue.each {
-    println ("- - - - - - - - - - - - ")
-    println "type = ${it.@id}"
-    println it.@message
-    println it.location.@file
-}
+// axml.issue.each {
+//     println ("- - - - - - - - - - - - ")
+//     println "type = ${it.@id}"
+//     println it.@message
+//     println it.location.@file
+// }
 
-axml.issue.location.each {
-    println "location = ${it.@file}"
-}
+// axml.issue.location.each {
+//     println "location = ${it.@file}"
+// }
+
+axml.issue.findAll { it.@id == "UnusedResources"}
+	.each {
+		println it.location.@file
+	}
 
 
 // ===================== 3. run lint =====================
