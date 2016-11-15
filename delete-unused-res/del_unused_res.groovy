@@ -34,15 +34,22 @@ def axml = new XmlParser().parse(lintResultXmlFile)
 
 axml.issue.findAll { it.@id == "UnusedResources"}
 	.each {
+		def resName
 		def msg = it.@errorLine1
 		def pattern = ~/="(.*)">/ // !!! not the "&quot;"
 		msg.eachMatch(pattern){ nodeName -> 
-			print nodeName //=> [ ="app_name2">, app_name2]
+			// print nodeName //=> [ ="app_name2">, app_name2]
+			resName = nodeName[1]
 		}
 
-
-		// def filePath = new File( it.location.@file[0] ) 
-		// println filePath.getName()
+		def filePath = new File( it.location.@file[0] ) 
+		def resXmlParser = new XmlParser().parse(filePath)
+		println resXmlParser.children()[0].@name
+		resXmlParser.children().findAll { resItem ->
+			resItem.@name == resName
+		}.each{ item -> 
+			println item
+		}
 	}
 
 
