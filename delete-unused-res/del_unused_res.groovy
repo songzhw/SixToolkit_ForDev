@@ -1,3 +1,8 @@
+// TODO single values
+// TODO one values in multiple  directories
+// TODO layout
+// TODO drawable, menu, 
+// TODO multiple layout,drawable, menu in different dir
 
 
 // ===================== 1. set basic argumetns =====================
@@ -12,7 +17,7 @@ projectPath = 'E:/workspace/mine/SixTools'
 // commandLint.execute(null, new File(projectPath))
 
 
-lintResultXmlFile = "res/lint_01.xml"
+lintResultXmlFile = "res/lint_01.xml"  //relative path
 
 def axml = new XmlParser().parse(lintResultXmlFile)
 
@@ -29,7 +34,15 @@ def axml = new XmlParser().parse(lintResultXmlFile)
 
 axml.issue.findAll { it.@id == "UnusedResources"}
 	.each {
-		println it.location.@file
+		def msg = it.@errorLine1
+		def pattern = ~/="(.*)">/ // !!! not the "&quot;"
+		msg.eachMatch(pattern){ nodeName -> 
+			print nodeName //=> [ ="app_name2">, app_name2]
+		}
+
+
+		// def filePath = new File( it.location.@file[0] ) 
+		// println filePath.getName()
 	}
 
 
