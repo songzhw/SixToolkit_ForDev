@@ -58,7 +58,15 @@ def colors = tmpXml.children()
 def toBeDeleted = colors.find { it.@name == 'pinkE56E98' }
 colors.remove(toBeDeleted) // remove the nodes from list, not file
 
-new XmlNodePrinter().print(tmpXml)
+// new File("res/colors.xml").withWriter { out ->
+//     def printer = new XmlNodePrinter(out)
+//     printer.preserveWhitespace = false
+//     printer.print(colors)
+// }
+
+def writer = new FileWriter("res/colors.xml")
+new XmlNodePrinter(new PrintWriter(writer)).print(colors)
+
 
 
 
