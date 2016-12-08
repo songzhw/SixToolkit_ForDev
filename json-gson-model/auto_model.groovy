@@ -10,9 +10,20 @@ ajson = new JsonSlurper().parse(reader)
 
 println '======================================='
 sb = new StringBuilder()
-sb = parseJson2ResponseFileContent()
-write2File(responseFileName, sb)
+json2Model()
 println '======================================='
+
+
+// ========================================
+// ========     private methods    ========
+// ========================================
+
+def json2Model(){
+    ajson.each {jsonKey, jsonValue ->
+        getType(jsonKey, jsonValue)
+    }
+}
+
 
 def write2File(fileFullName, content){
     def file = new File(fileFullName)
@@ -21,15 +32,9 @@ def write2File(fileFullName, content){
     }
 }
 
-
-//ajson.each { key, value ->
-//    println "$key (type = ${value.getClass()})"
-//    println "TYPE : ${getType(key, value)}"
-//    println "-----------------------------------------------------------------"
-//}
-
 def getType(key, value){
     valueType = value.getClass()
+    println "szw $valueType"
     switch(valueType){
         case 'class java.lang.String':
             return 'String';
