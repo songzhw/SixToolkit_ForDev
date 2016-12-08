@@ -20,7 +20,8 @@ println '======================================='
 
 def json2Model(){
     ajson.each {jsonKey, jsonValue ->
-        getType(jsonKey, jsonValue)
+        String type = getType(jsonKey, jsonValue)
+        println("private $type $jsonKey;")
     }
 }
 
@@ -34,7 +35,6 @@ def write2File(fileFullName, content){
 
 def getType(key, value){
     def valueType = value.getClass()
-    println "szw $key -- ${valueType}"
     switch(valueType){
         case 'class java.lang.String':
         case 'class java.lang.Integer':

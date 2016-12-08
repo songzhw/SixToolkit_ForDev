@@ -17,7 +17,6 @@
     }
   ],
   "booleanKey": true,
-  "nullKey": null,
   "numberKey": 123,
   "objectKey": {
     "aKey": "b",
