@@ -1,0 +1,2 @@
+groovy auto_model.groovy
+pause
