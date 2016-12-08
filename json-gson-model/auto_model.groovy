@@ -8,12 +8,25 @@ import groovy.json.JsonSlurper
 def reader = new FileReader('test2.json')
 ajson = new JsonSlurper().parse(reader)
 
-ajson.each { key, value ->
-    println "$key (type = ${value.getClass()})"
-    println "TYPE : ${getType(key, value)}"
-    println "-----------------------------------------------------------------"
+println '======================================='
+sb = new StringBuilder()
+sb = parseJson2ResponseFileContent()
+write2File(responseFileName, sb)
+println '======================================='
+
+def write2File(fileFullName, content){
+    def file = new File(fileFullName)
+    file.withWriter{ Writer writer ->
+        writer.append(content)
+    }
 }
 
+
+//ajson.each { key, value ->
+//    println "$key (type = ${value.getClass()})"
+//    println "TYPE : ${getType(key, value)}"
+//    println "-----------------------------------------------------------------"
+//}
 
 def getType(key, value){
     valueType = value.getClass()
@@ -26,13 +39,10 @@ def getType(key, value){
             return 'int';
         case 'class java.util.ArrayList':
             listSubClass = value[0].getClass()
-            //println "getType() : ArrayList : listSubClass = $listSubClass"
-            listSubType = getTypeFromWholePath("${key}Item", value[0])
-            return "ArrayList<$listSubType>"
+            listSubType = getType("${key}Item", value[0])
+            return "List<$listSubType>"
         case 'class groovy.json.internal.LazyMap':
-            //println "$key -- ${key.getClass()}"
             objectType = key.capitalize();
             return objectType;
-    //return 'Object'
     }
 }
