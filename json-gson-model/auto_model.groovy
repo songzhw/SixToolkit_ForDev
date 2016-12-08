@@ -33,21 +33,20 @@ def write2File(fileFullName, content){
 }
 
 def getType(key, value){
-    valueType = value.getClass()
-    println "szw $valueType"
+    def valueType = value.getClass()
+    println "szw $key -- ${valueType}"
     switch(valueType){
         case 'class java.lang.String':
+        case 'class java.lang.Integer':
+        case 'class java.math.BigDecimal':
             return 'String';
         case 'class java.lang.Boolean':
             return 'boolean';
-        case 'class java.lang.Integer':
-            return 'int';
         case 'class java.util.ArrayList':
-            listSubClass = value[0].getClass()
-            listSubType = getType("${key}Item", value[0])
+            def listSubType = getType("${key}Item", value[0])
             return "List<$listSubType>"
         case 'class groovy.json.internal.LazyMap':
-            objectType = key.capitalize();
+            def objectType = key.capitalize();
             return objectType;
     }
 }
