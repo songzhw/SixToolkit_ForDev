@@ -1,12 +1,9 @@
-package tool.auto_model
 
 import groovy.json.JsonSlurper
 
 /**
  * Created by songzhw on 2016-12-07.
  */
-
-// todo : object: arralylist:[], object2 : {}.
 
 
 coreName = "miao"
@@ -16,9 +13,8 @@ def reader = new FileReader('test2.json')
 ajson = new JsonSlurper().parse(reader)
 
 println '======================================='
-//todo  create a item directory if not existing
 createSubFolder()
-json2Model()
+write2ItemFile(coreName, ajson)
 println '======================================='
 
 // ========================================
@@ -29,11 +25,6 @@ def createSubFolder(){
     if(!itemFolder.exists()) {
         itemFolder.mkdir()
     }
-}
-
-
-def json2Model() {
-    write2ItemFile(coreName, ajson)
 }
 
 // generate Object or List item class file
@@ -73,13 +64,11 @@ def write2ItemFile(ikey, ivalue) {
     }
     add(sb2, "}")
 
-    //todo
-    add(sb2, " * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *")
-//    write2File("./item/${ikey.capitalize()}.java", sb2.toString())
+//    add(sb2, " * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *")
+    write2File("./item/${ikey.capitalize()}.java", sb2.toString())
 
-    println sb2
+//    println sb2
 }
-
 
 def write2File(fileFullName, content) {
     def file = new File(fileFullName)
