@@ -5,8 +5,9 @@ import groovy.json.JsonSlurper
 /**
  * Created by songzhw on 2016-12-07.
  */
-lineSeparator = System.getProperty("line.separator");
+coreName = "miao"
 
+lineSeparator = System.getProperty("line.separator");
 def reader = new FileReader('test2.json')
 ajson = new JsonSlurper().parse(reader)
 
@@ -20,16 +21,22 @@ println '======================================='
 // ========================================
 
 def json2Model() {
+    add("public class ${coreName.capitalize()} {")
     ajson.each { jsonKey, jsonValue ->
         String type = getType(jsonKey, jsonValue)
         add1("@SerializedName(\"$jsonKey\")")
         add1("private $type $jsonKey;")
     }
+    add("}")
     print sb
 }
 
+def add(content) {
+    sb << "$content" << lineSeparator
+}
+
 def add1(content) {
-    sb << "\t $content" << lineSeparator
+    sb << "\t$content" << lineSeparator
 }
 
 
