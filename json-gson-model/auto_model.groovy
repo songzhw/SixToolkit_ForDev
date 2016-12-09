@@ -13,6 +13,7 @@ ajson = new JsonSlurper().parse(reader)
 
 println '======================================='
 sb = new StringBuilder();
+//todo  create a item directory if not existing
 json2Model()
 println '======================================='
 
@@ -27,6 +28,18 @@ def json2Model() {
         add1("@SerializedName(\"$jsonKey\")")
         add1("private $type $jsonKey;")
     }
+    addLine()
+
+    ajson.each{jsonKey, jsonValue ->
+        String type = getType(jsonKey, jsonValue)
+        add1("public $type get${jsonKey.capitalize()}() {")
+        add2("return $jsonKey;")
+        add1("}")
+
+        add1("public void set${jsonKey.capitalize()}($type $jsonKey) {")
+        add2("this.$jsonKey = $jsonKey;")
+        add1("}")
+    }
     add("}")
     print sb
 }
@@ -35,8 +48,16 @@ def add(content) {
     sb << "$content" << lineSeparator
 }
 
+def add2(content) {
+    sb << "\t\t$content" << lineSeparator
+}
+
 def add1(content) {
     sb << "\t$content" << lineSeparator
+}
+
+def addLine(){
+    sb << lineSeparator
 }
 
 
