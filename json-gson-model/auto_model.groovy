@@ -14,12 +14,21 @@ ajson = new JsonSlurper().parse(reader)
 println '======================================='
 sb = new StringBuilder();
 //todo  create a item directory if not existing
+createSubFolder()
 json2Model()
+write2File("./item/${coreName.capitalize()}.java", sb.toString())
 println '======================================='
 
 // ========================================
 // ========     private methods    ========
 // ========================================
+def createSubFolder(){
+    def itemFolder = new File("./item")
+    if(!itemFolder.exists()) {
+        itemFolder.mkdir()
+    }
+}
+
 
 def json2Model() {
     add("public class ${coreName.capitalize()} {")
