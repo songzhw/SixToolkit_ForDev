@@ -5,37 +5,44 @@ import groovy.json.JsonSlurper
 /**
  * Created by songzhw on 2016-12-07.
  */
+lineSeparator = System.getProperty("line.separator");
+
 def reader = new FileReader('test2.json')
 ajson = new JsonSlurper().parse(reader)
 
 println '======================================='
-sb = new StringBuilder()
+sb = new StringBuilder();
 json2Model()
 println '======================================='
-
 
 // ========================================
 // ========     private methods    ========
 // ========================================
 
-def json2Model(){
-    ajson.each {jsonKey, jsonValue ->
+def json2Model() {
+    ajson.each { jsonKey, jsonValue ->
         String type = getType(jsonKey, jsonValue)
-        println("private $type $jsonKey;")
+        add1("@SerializedName(\"$jsonKey\")")
+        add1("private $type $jsonKey;")
     }
+    print sb
+}
+
+def add1(content) {
+    sb << "\t $content" << lineSeparator
 }
 
 
-def write2File(fileFullName, content){
+def write2File(fileFullName, content) {
     def file = new File(fileFullName)
-    file.withWriter{ Writer writer ->
+    file.withWriter { Writer writer ->
         writer.append(content)
     }
 }
 
-def getType(key, value){
+def getType(key, value) {
     def valueType = value.getClass()
-    switch(valueType){
+    switch (valueType) {
         case 'class java.lang.String':
         case 'class java.lang.Integer':
         case 'class java.math.BigDecimal':
