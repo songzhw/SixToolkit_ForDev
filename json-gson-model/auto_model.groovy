@@ -48,7 +48,12 @@ def write2ItemFile(ikey, ivalue) {
         if(type == "String" || type == "boolean") {
 
         } else if(type.startsWith("List")) {
-
+            def subtype = ""
+            def pattern = ~/List<(.*)>/
+            type.find(pattern){
+                subtype = it[1]
+            }
+            write2ItemFile(subtype, jsonValue[0])
 
         } else { // object type
             write2ItemFile(jsonKey, jsonValue)
