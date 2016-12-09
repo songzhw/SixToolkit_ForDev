@@ -5,6 +5,10 @@ import groovy.json.JsonSlurper
 /**
  * Created by songzhw on 2016-12-07.
  */
+
+// todo : object: arralylist:[], object2 : {}.
+
+
 coreName = "miao"
 
 lineSeparator = System.getProperty("line.separator");
@@ -12,11 +16,9 @@ def reader = new FileReader('test2.json')
 ajson = new JsonSlurper().parse(reader)
 
 println '======================================='
-sb = new StringBuilder();
 //todo  create a item directory if not existing
 createSubFolder()
 json2Model()
-write2File("./item/${coreName.capitalize()}.java", sb.toString())
 println '======================================='
 
 // ========================================
@@ -31,42 +33,46 @@ def createSubFolder(){
 
 
 def json2Model() {
-    add("public class ${coreName.capitalize()} {")
-    ajson.each { jsonKey, jsonValue ->
+    write2ItemFile(coreName, ajson)
+}
+
+// generate Object or List item class file
+def write2ItemFile(ikey, ivalue) {
+    def sb2 = new StringBuilder()
+    add(sb2, "public class ${ikey.capitalize()} {")
+    ivalue.each { jsonKey, jsonValue ->
         String type = getType(jsonKey, jsonValue)
-        add1("@SerializedName(\"$jsonKey\")")
-        add1("private $type $jsonKey;")
-    }
-    addLine()
+        add1(sb2, "@SerializedName(\"$jsonKey\")")
+        add1(sb2, "private $type $jsonKey;")
 
-    ajson.each{jsonKey, jsonValue ->
+        if(type == "String" || type == "boolean") {
+
+        } else if(type.startsWith("List")) {
+
+
+        } else { // object type
+            write2ItemFile(jsonKey, jsonValue)
+        }
+    }
+    addLine(sb2)
+
+    ivalue.each{jsonKey, jsonValue ->
         String type = getType(jsonKey, jsonValue)
-        add1("public $type get${jsonKey.capitalize()}() {")
-        add2("return $jsonKey;")
-        add1("}")
+        add1(sb2, "public $type get${jsonKey.capitalize()}() {")
+        add2(sb2, "return $jsonKey;")
+        add1(sb2, "}")
 
-        add1("public void set${jsonKey.capitalize()}($type $jsonKey) {")
-        add2("this.$jsonKey = $jsonKey;")
-        add1("}")
+        add1(sb2, "public void set${jsonKey.capitalize()}($type $jsonKey) {")
+        add2(sb2, "this.$jsonKey = $jsonKey;")
+        add1(sb2, "}")
     }
-    add("}")
-    print sb
-}
+    add(sb2, "}")
 
-def add(content) {
-    sb << "$content" << lineSeparator
-}
+    //todo
+    add(sb2, " * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *")
+//    write2File("./item/${ikey.capitalize()}.java", sb2.toString())
 
-def add2(content) {
-    sb << "\t\t$content" << lineSeparator
-}
-
-def add1(content) {
-    sb << "\t$content" << lineSeparator
-}
-
-def addLine(){
-    sb << lineSeparator
+    println sb2
 }
 
 
@@ -93,4 +99,20 @@ def getType(key, value) {
             def objectType = key.capitalize();
             return objectType;
     }
+}
+
+def add(sb3, content){
+    sb3 << "$content" << lineSeparator
+}
+
+def add2(sb3, content) {
+    sb3 << "\t\t$content" << lineSeparator
+}
+
+def add1(sb3, content) {
+    sb3 << "\t$content" << lineSeparator
+}
+
+def addLine(sb3){
+    sb3 << lineSeparator
 }
