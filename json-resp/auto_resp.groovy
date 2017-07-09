@@ -76,14 +76,13 @@ def parseJson2ResponseFileContent(){
     sb<<lineSeparator
 
     sb<<"import android.text.TextUtils;"<<lineSeparator
-    sb<<"import your.company.BaseResponse;"<<lineSeparator
     sb<<"import java.util.ArrayList;"<<lineSeparator
     sb<<"import org.json.JSONArray;"<<lineSeparator
     sb<<"import org.json.JSONException;"<<lineSeparator
     sb<<"import org.json.JSONObject;"<<lineSeparator
     sb<<lineSeparator
 
-    sb<<"public class ${responseName} extends BaseResponse {"<<lineSeparator
+    sb<<"public class ${responseName} {"<<lineSeparator
     ajson.each{key, value ->
         def type = getTypeFromWholePath(key, value)
         sb<<"\tpublic $type $key;"<<lineSeparator
@@ -180,7 +179,23 @@ def writeItemData2File(fkey, fvalue){
     sb2<<"\t\tif(json != null){"<<lineSeparator
     fvalue.each{key, value ->
         def type = getTypeFromWholePath(key, value)
-        sb2<<"\t\t\t${key} = json.opt${type.capitalize()}(\"${key}\");"<<lineSeparator
+        if(type.startsWith("ArrayList")) {
+            def subtype = ""
+            def pattern = ~/ArrayList<(.*)>/
+            type.find(pattern){
+                subtype = it[1]
+            }
+
+            sb2<<"\t\t\tJSONArray ary = json.optJSONArray(\"$key\");"<<lineSeparator
+            sb2<<"\t\t\tint size = ary.length();"<<lineSeparator
+            sb2<<"\t\t\t$key = new ArrayList<>();"<<lineSeparator
+            sb2<<"\t\t\tfor (int i = 0 ; i < size ; i++) {"<<lineSeparator
+            sb2<<"\t\t\t\t${key}.add(ary.opt${subtype.capitalize()}(i));"<<lineSeparator
+            sb2<<"\t\t\t\t}"<<lineSeparator
+
+        } else {
+            sb2<<"\t\t\t${key} = json.opt${type.capitalize()}(\"${key}\");"<<lineSeparator
+        }
     }
     sb2<<"\t\t}"<<lineSeparator
     sb2<<"\t}"<<lineSeparator
