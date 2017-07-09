@@ -15,12 +15,13 @@ import groovy.json.JsonSlurper
 
 basicFileName = 'SdkPayments'
 
-path = "E:/workspace/groovy/tools/output/" //要以 "/" 结尾
+path = "E:/workspace/mine/android-toolkit/json-resp/output/" //要以 "/" 结尾
 responseName = "${basicFileName}Response"
 responseFileName = "${path}${responseName}.java"
 lineSeparator = System.getProperty("line.separator");
 
-
+def directory = new File(path)
+directory.mkdirs()
 def reader = new FileReader('test2.json')
 ajson = new JsonSlurper().parse(reader)
 
@@ -33,9 +34,8 @@ println '======================================='
 
 
 
-
-
 def write2File(fileFullName, content){
+    println("szw file = $fileFullName")
     def file = new File(fileFullName)
     file.withWriter{ Writer writer ->
         writer.append(content)
@@ -204,5 +204,5 @@ def writeItemData2File(fkey, fvalue){
 
     sb2<<"}"
 
-    write2File("${path}item/${fkey.capitalize()}.java", sb2)
+    write2File("${path}${fkey.capitalize()}.java", sb2)
 }
