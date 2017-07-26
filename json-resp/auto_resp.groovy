@@ -90,7 +90,6 @@ def parseJson2ResponseFileContent(){
     sb<<lineSeparator
 
     sb<<"\tpublic $responseName (String jsonStr){"<<lineSeparator
-    sb<<"\t\tsuper(jsonStr);"<<lineSeparator
     sb<<"\t\tif(!TextUtils.isEmpty(jsonStr)){"<<lineSeparator
     sb<<"\t\t\ttry{"<<lineSeparator
     sb<<"\t\t\t\tJSONObject json = new JSONObject(jsonStr);"<<lineSeparator
