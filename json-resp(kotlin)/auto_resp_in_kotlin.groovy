@@ -109,7 +109,7 @@ def parseJson(jsons, className) {
 
         sb << "\tfor(i in 0 until len) {" << lineSeparator
         sb << "\t\tval obj = array.optJSONObject(i)" << lineSeparator
-        sb << "\t\tval oneItem = ChildrenItem(obj)" << lineSeparator
+        sb << "\t\tval oneItem = ${className}(obj)" << lineSeparator
         sb << "\t\tlist.add(oneItem)" << lineSeparator
         sb << "\t}" << lineSeparator
         sb << lineSeparator
@@ -156,3 +156,5 @@ def output(fileFullName, content) {
         writer.append(content)
     }
 }
+
+
