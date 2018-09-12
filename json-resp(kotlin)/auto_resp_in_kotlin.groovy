@@ -15,13 +15,12 @@ def reader = new FileReader('src.json')
 ajson = new JsonSlurper().parse(reader)
 
 println '======================================='
-def content = parseJson(ajson, responseName, false)
+def content = parseJson(ajson, responseName)
 output(responseFileName, content)
 println '======================================='
 
 
-
-def parseJson(jsons, className, isGenerateArrayCode) {
+def parseJson(jsons, className) {
     def sb = new StringBuilder()
     sb << "package your.company.data.entity" << lineSeparator
     sb << lineSeparator  //这一块不用太在意, 粘贴时AndroidStudio会帮你修正package的
@@ -45,6 +44,7 @@ def parseJson(jsons, className, isGenerateArrayCode) {
     sb << "\tinit {" << lineSeparator
     jsons.each { key, value ->
         def type = getType(key, value)
+        println "parseJson() key = $key, type = $type, value = $value "
 
         if (type.startsWith("ArrayList")) {
             def subtype = ""
@@ -56,7 +56,6 @@ def parseJson(jsons, className, isGenerateArrayCode) {
             sb << lineSeparator
             sb << "\t\tval array = json.optJSONArray(\"$key\")" << lineSeparator
 
-            //println "subtype = $subtype"
             if (subtype.equals("Long") || subtype.equals("Int")
                     || subtype.equals("String") || subtype.equals("Boolean")) {
                 sb << "\t\t$key = ArrayList()" << lineSeparator
@@ -73,13 +72,12 @@ def parseJson(jsons, className, isGenerateArrayCode) {
 
             }
 
-        }
+        } //end of ArrayList<subType>
         else if (type.equals("Long") || type.equals("Int")
                 || type.equals("String") || type.equals("Boolean")) {
             type = type.capitalize()
             sb << "\t\t$key = json.opt${type}(\"$key\")" << lineSeparator
-        }
-        else {
+        } else {
             //create the Item's JavaBean
             writeSubFiles(key, value)
 
@@ -89,14 +87,32 @@ def parseJson(jsons, className, isGenerateArrayCode) {
             sb << "\t\t$key = $type(sub)" << lineSeparator
             sb << lineSeparator
         }
+
     }
 
     sb << "\t}" << lineSeparator
     sb << lineSeparator
     sb << "}" << lineSeparator
+
+    if (className.endsWith("Item")) {
+        sb << lineSeparator
+        sb << "fun create${className}(array: JSONArray) : ArrayList<$className> {" << lineSeparator
+        sb << "\tval list = ArrayList<$className>()" << lineSeparator
+        sb << "\tval len = array.length()" << lineSeparator
+        sb << lineSeparator
+
+        sb << "\tfor(i in 0 until len) {" << lineSeparator
+        sb << "\t\tval obj = array.optJSONObject(i)" << lineSeparator
+        sb << "\t\tval oneItem = ChildrenItem(obj)" << lineSeparator
+        sb << "\t\tlist.add(oneItem)" << lineSeparator
+        sb << "\t}" << lineSeparator
+        sb << lineSeparator
+
+        sb << "\treturn list" << lineSeparator
+        sb << "}" << lineSeparator
+    }
     return sb
 }
-
 
 //key参数是防备有JsonArray<自定义类>的， 这样可以给子Item命名
 def getType(key, value) {
@@ -113,11 +129,9 @@ def getType(key, value) {
             return 'Int';
         case 'class java.util.ArrayList':
             listSubClass = value[0].getClass()
-            //println "getType() : ArrayList : listSubClass = $listSubClass"
             listSubType = getType("${key}Item", value[0])
             return "ArrayList<$listSubType>"
         case 'class groovy.json.internal.LazyMap':
-            //println "$key -- ${key.getClass()}"
             objectType = key.capitalize();
             return objectType;
     }
@@ -125,8 +139,7 @@ def getType(key, value) {
 
 
 def writeSubFiles(fkey, fvalue) {
-    println "key = $fkey\nvalue = $fvalue"
-    def sb2 = parseJson(fvalue, fkey.capitalize(), true)
+    def sb2 = parseJson(fvalue, fkey.capitalize())
     output("${path}${fkey.capitalize()}.kt", sb2)
 }
 
