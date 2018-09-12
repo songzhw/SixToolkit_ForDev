@@ -14,6 +14,8 @@ directory.mkdirs()
 def reader = new FileReader('src.json')
 ajson = new JsonSlurper().parse(reader)
 
+arrayNumber = 0  //声明为int arrayNumber = 0, 就会是局部变量了, 在parseJson()等方法里没法使用了
+
 println '======================================='
 def content = parseJson(ajson, responseName)
 output(responseFileName, content)
@@ -52,25 +54,27 @@ def parseJson(jsons, className) {
             type.find(pattern) {
                 subtype = it[1]
             }
-
             sb << lineSeparator
-            sb << "\t\tval array = json.optJSONArray(\"$key\")" << lineSeparator
+
+            def ary = "array${arrayNumber}"
+            sb << "\t\tval ${ary} = json.optJSONArray(\"$key\")" << lineSeparator
 
             if (subtype.equals("Long") || subtype.equals("Int")
                     || subtype.equals("String") || subtype.equals("Boolean")) {
                 sb << "\t\t$key = ArrayList()" << lineSeparator
-                sb << "\t\tfor(i in 0 until array.length()){" << lineSeparator
-                sb << "\t\t\tval asub = array.opt$subtype(i) " << lineSeparator
+                sb << "\t\tfor(i in 0 until ${ary}.length()){" << lineSeparator
+                sb << "\t\t\tval asub = ${ary}.opt$subtype(i) " << lineSeparator
                 sb << "\t\t\t${key}.add(asub)" << lineSeparator
                 sb << "\t\t}" << lineSeparator
                 sb << lineSeparator
             } else {
                 writeSubFiles(subtype, value[0])
 
-                sb << "\t\t${key} = create${subtype}(array)" << lineSeparator
+                sb << "\t\t${key} = create${subtype}(${ary})" << lineSeparator
                 sb << lineSeparator
 
             }
+            arrayNumber++
 
         } //end of ArrayList<subType>
         else if (type.equals("Long") || type.equals("Int")
