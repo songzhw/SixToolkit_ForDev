@@ -14,7 +14,7 @@ directory.mkdirs()
 def reader = new FileReader('src.json')
 ajson = new JsonSlurper().parse(reader)
 
-arrayNumber = 0  //声明为int arrayNumber = 0, 就会是局部变量了, 在parseJson()等方法里没法使用了
+variableNum = 0 //声明为int variableNum = 0, 就会是局部变量了, 在parseJson()等方法里没法使用了
 
 println '======================================='
 def content = parseJson(ajson, responseName)
@@ -56,7 +56,7 @@ def parseJson(jsons, className) {
             }
             sb << lineSeparator
 
-            def ary = "array${arrayNumber}"
+            def ary = "array${variableNum}"
             sb << "\t\tval ${ary} = json.optJSONArray(\"$key\")" << lineSeparator
 
             if (subtype.equals("Long") || subtype.equals("Int")
@@ -74,7 +74,7 @@ def parseJson(jsons, className) {
                 sb << lineSeparator
 
             }
-            arrayNumber++
+            variableNum++
 
         } //end of ArrayList<subType>
         else if (type.equals("Long") || type.equals("Int")
@@ -87,9 +87,11 @@ def parseJson(jsons, className) {
 
             //add lines to File
             sb << lineSeparator
-            sb << "\t\tval sub = json.optJSONObject(\"${key}\")" << lineSeparator
-            sb << "\t\t$key = $type(sub)" << lineSeparator
+            sb << "\t\tval sub${variableNum} = json.optJSONObject(\"${key}\")" << lineSeparator
+            sb << "\t\t$key = $type(sub${variableNum})" << lineSeparator
             sb << lineSeparator
+
+            variableNum++
         }
 
     }
