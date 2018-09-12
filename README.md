@@ -102,3 +102,6 @@ generate MVP class for you.
 
 ## 6. Auto-Delete-Unused-Resource
 you may have loads of unused resouces after so many iterations. This tool will remove all the unused resouces for you. All you have to do is just set arguments and double click a executable file!
+
+## 7. Json to Response(in Kotlin)
+This time I fixed a couple of bug. And this script could generate a couple of response kotlin files for you, rather than java files.
