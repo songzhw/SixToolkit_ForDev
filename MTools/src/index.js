@@ -4,7 +4,7 @@
 const { getApi } = require("./api_lvl");
 
 const argv = require("yargs")
-  .alias("a", "api")
+  .alias("a", "api")  // search api levels
   .argv;
 const api = argv.api;
 
