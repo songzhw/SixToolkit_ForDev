@@ -1,7 +1,4 @@
 {
   "name": "MTools",
-  "description": "Tools for mobile development, by szw",
-  "bin": {
-    "mtools": "index.js"
-  }
+  "description": "Tools for mobile development, by szw"
 }
