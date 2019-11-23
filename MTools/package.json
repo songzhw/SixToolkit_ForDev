@@ -1,9 +1,6 @@
 {
   "name": "mtools",
   "description": "Tools for mobile development, by szw",
-  "scripts": {
-    "mtools": "node src/index.js"
-  },
   "dependencies": {
     "@types/node": "^12.12.12",
     "@types/yargs": "^13.0.3",
