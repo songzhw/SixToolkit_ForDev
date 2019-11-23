@@ -1,9 +1,7 @@
 {
   "name": "MTools",
-  "version": "1.0.0",
-  "description": "Tools for mobile developement, by szw",
-  "main": "index.js",
-  "author": "songzhw2012",
-  "license": "MIT",
-  "private": true
+  "description": "Tools for mobile development, by szw",
+  "bin": {
+    "mtools": "index.js"
+  }
 }
