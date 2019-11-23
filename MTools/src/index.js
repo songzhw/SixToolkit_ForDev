@@ -1,10 +1,9 @@
 #!/usr/bin/env node
-console.log('hello index');
+console.log("hello index");
 
+// src/index.js --name=tom --id=23 -h=true (参数单字母用-, 多字母用--开头!!!)
+// argv的结果就是:  { _: [], name: 'tom', id: 23, h: 'true', '$0': 'src/index.js' }
 
+let argv = require("yargs").argv;
+console.log(`szw args = `, argv);
 
-/*
-$ yarn link
-    success Registered "MTools".
-    info You can now run `yarn link "MTools"` in the projects where you want to use this package and it will be used instead.
- */

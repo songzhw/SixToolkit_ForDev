@@ -1,4 +1,10 @@
 {
   "name": "MTools",
-  "description": "Tools for mobile development, by szw"
+  "description": "Tools for mobile development, by szw",
+  "scripts": {
+    "mtools": "node src/index.js"
+  },
+  "dependencies": {
+    "yargs": "^15.0.2"
+  }
 }
