@@ -13,7 +13,7 @@ function getApi(num) {
 
   androids.filter(it => it.id === num)
     .forEach(it => {
-      data.rows.push({ id: it.id, name: it.name, version: it.version, date: it.date });
+      data.rows.push({ id: Colors.red(it.id), name: it.name, version: it.version, date: it.date });
     });
   grid.render(data);
 

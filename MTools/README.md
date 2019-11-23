@@ -1,5 +1,19 @@
-Tools for mobile developement
+Tools for mobile development
 
+## How to install it
+1. Make sure you've installed node.js
+2. copy the src folder to any folder.
+3. add permision : `$ chmod 755 mtools.js`
+4. add a environment variable to your `~/.bash_profile`
+
+```
+export PATH=$PATH:~/MTools/src
+```
+
+5. you now can run the code everywhere.
+`$ mtools -a=21`
+
+## Modules
 ### 1. API Levels
 the action is "-a", or "--action", value is a number.
 
