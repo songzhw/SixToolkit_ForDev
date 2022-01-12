@@ -1,6 +1,12 @@
-class **ACTIVITY_NAME**Activity : BaseActivity() {
+package com.c51.feature.##FEATURE_NAME##
+
+import android.os.Bundle
+import com.c51.R
+import com.c51.core.activity.BaseActivity
+
+class ##ACTIVITY_NAME##Activity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.**LAYOUT_NAME**)
+        setContentView(R.layout.##LAYOUT_NAME##)
     }
 }
