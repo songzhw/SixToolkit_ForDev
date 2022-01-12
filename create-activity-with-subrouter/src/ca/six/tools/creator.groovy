@@ -15,6 +15,11 @@ fileContent = fileContent.replaceAll("##LAYOUT_NAME##", layoutName)
 fileContent = fileContent.replaceAll("##FEATURE_NAME##", argPackageName)
 println fileContent
 
+def destFile = new File("../../../../output/${argClassName}Activity.kt")
+destFile.createNewFile()
+destFile.write(fileContent)
+
+
 //  camelCase, PascalCase, under_score_case, kebab-case
 def camelToUserScore(String camel) {
     String underscore;
