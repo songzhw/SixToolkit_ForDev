@@ -8,7 +8,7 @@
         android:hardwareAccelerated="true">
 
         <activity
-            android:name="com.c51.feature.preauth.MainActivity"
+            android:name="com.some.feature.preauth.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Transitions.GreenStatus"
             android:windowSoftInputMode="adjustNothing" />

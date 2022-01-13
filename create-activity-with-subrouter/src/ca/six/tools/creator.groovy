@@ -28,7 +28,7 @@ private void generateXmlFile(String argPackageName, String activityName) {
     def from = """<!-- INSERT1 -->"""
     def to = """$from
         <activity
-            android:name="com.c51.feature.${argPackageName}.${activityName}Activity"
+            android:name="com.some.feature.${argPackageName}.${activityName}Activity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Transitions.GreenStatus"
             android:windowSoftInputMode="adjustNothing" />
@@ -80,9 +80,9 @@ $constTarget
 \t\t)
 """
 
-    def importTarget = "import com.c51.feature.settings.CommunicationPreferenceActivity"
+    def importTarget = "import com.some.feature.settings.CommunicationPreferenceActivity"
     def importNewPackage = """$importTarget
-import com.c51.feature.${argPackageName}.${activityName}Activity
+import com.some.feature.${argPackageName}.${activityName}Activity
 """
 
 

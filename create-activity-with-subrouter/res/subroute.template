@@ -1,6 +1,6 @@
-package com.c51.core.navigation.router
+package com.some.core.navigation.router
 
-import com.c51.feature.settings.CommunicationPreferenceActivity
+import com.some.feature.settings.CommunicationPreferenceActivity
 
 class AppSubRoute : ISubRoute {
     override fun registerSubRoute(map: HashMap<String, RouteMeta>) {

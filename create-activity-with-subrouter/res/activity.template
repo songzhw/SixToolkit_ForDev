@@ -1,8 +1,8 @@
-package com.c51.feature.##FEATURE_NAME##
+package com.some.feature.##FEATURE_NAME##
 
 import android.os.Bundle
-import com.c51.R
-import com.c51.core.activity.BaseActivity
+import com.some.R
+import com.some.core.activity.BaseActivity
 
 class ##ACTIVITY_NAME##Activity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
