@@ -1,0 +1,15 @@
+package com.c51.core.navigation.router
+
+import com.c51.feature.settings.CommunicationPreferenceActivity
+
+
+class AppSubRoute : ISubRoute {
+    override fun registerSubRoute(map: HashMap<String, RouteMeta>) {
+        map[ROUTE_COMMUNICATION_PREFERENCE] = RouteMeta(
+            ROUTE_COMMUNICATION_PREFERENCE,
+            CommunicationPreferenceActivity::class.java
+        )
+    }
+}
+
+const val ROUTE_COMMUNICATION_PREFERENCE = "preferences/notifications"
