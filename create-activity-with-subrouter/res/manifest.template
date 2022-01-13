@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="xxxx">
+
+    <application
+        android:usesCleartextTraffic="true"
+        android:hardwareAccelerated="true">
+
+        <activity
+            android:name="com.c51.feature.preauth.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transitions.GreenStatus"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <!-- INSERT1 -->
+
+    </application>
+
+</manifest>

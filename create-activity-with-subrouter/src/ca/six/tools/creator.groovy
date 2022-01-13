@@ -18,9 +18,26 @@ generateActivity(activityName, layoutName, argPackageName)
 
 generateSubRoute(newConstName, argDeepLinkName, activityName, argPackageName)
 
+generateXmlFile(argPackageName, activityName)
 
+private void generateXmlFile(String argPackageName, String activityName) {
+    def file = new File("../../../../res/manifest.template")
+    def destFile = new File("../../../../output/AndroidManifest.xml")
 
-// = = = = = =
+    def text = file.text
+    def from = """<!-- INSERT1 -->"""
+    def to = """$from
+        <activity
+            android:name="com.c51.feature.${argPackageName}.${activityName}Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transitions.GreenStatus"
+            android:windowSoftInputMode="adjustNothing" />
+"""
+    text = text.replace(from, to)
+    destFile.createNewFile()
+    destFile.write(text)
+}
+
 
 //  camelCase, PascalCase, under_score_case, kebab-case
 private String camelToUserScore(String camel) {
@@ -77,6 +94,3 @@ import com.c51.feature.${argPackageName}.${activityName}Activity
     destFile.createNewFile()
     destFile.write(newFileContent)
 }
-
-// TODO 1. "//Insert1" need to be added to the AppSubRoute
-//
