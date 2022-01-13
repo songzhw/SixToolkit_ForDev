@@ -16,44 +16,14 @@ if(this.args.length > 2) {
 
 generateActivity(activityName, layoutName, argPackageName)
 
+generateSubRoute(newConstName, argDeepLinkName, activityName, argPackageName)
 
 
-def file = new File("../../../../res/subroute.template")
-
-def constTarget = 'const val ROUTE_COMMUNICATION_PREFERENCE = "preferences/notifications"'
-def deeplinkName = """
-const val ROUTE_${newConstName} = "${argDeepLinkName}"
-$constTarget
-"""
-
-def mapTarget = """\toverride fun registerSubRoute(map: HashMap<String, RouteMeta>) {"""
-def mapNewNode = """
-$mapTarget
-\t\tmap[${newConstName}] = RouteMeta(
-\t\t\t${newConstName},
-\t\t\t${activityName}Activity::class.java
-\t\t)
-"""
-
-def importTarget = "import com.c51.feature.settings.CommunicationPreferenceActivity"
-def importNewPackage = """
-$importTarget
-import com.c51.feature.${argPackageName}.${activityName}Activity
-"""
-
-
-def newFileContent = file.text.replaceAll(constTarget, deeplinkName)
-//newFileContent = newFileContent.replaceAll(mapTarget, mapNewNode)
-newFileContent = newFileContent.replaceAll(importTarget, importNewPackage)
-
-def destFile = new File("../../../../output/AppRoute.kt")
-destFile.createNewFile()
-destFile.write(newFileContent)
 
 // = = = = = =
 
 //  camelCase, PascalCase, under_score_case, kebab-case
-private def camelToUserScore(String camel) {
+private String camelToUserScore(String camel) {
     String underscore;
     underscore = String.valueOf(Character.toLowerCase(camel.charAt(0))).toLowerCase()
     for (int i = 1; i < camel.length(); i++) {
@@ -75,3 +45,38 @@ private void generateActivity(String activityName, String layoutName, String arg
     destFile.createNewFile()
     destFile.write(fileContent)
 }
+
+private void generateSubRoute(newConstName, String argDeepLinkName, String activityName, String argPackageName) {
+    def file = new File("../../../../res/subroute.template")
+
+    def newRouteName = "ROUTE_${newConstName}"
+    def constTarget = 'const val ROUTE_COMMUNICATION_PREFERENCE = "preferences/notifications"'
+    def deeplinkName = """const val ${newRouteName} = "${argDeepLinkName}"
+$constTarget
+"""
+
+    def mapTarget = "// INSERT1"
+    def mapNewNode = """$mapTarget
+\t\tmap[${newRouteName}] = RouteMeta(
+\t\t\t${newRouteName},
+\t\t\t${activityName}Activity::class.java
+\t\t)
+"""
+
+    def importTarget = "import com.c51.feature.settings.CommunicationPreferenceActivity"
+    def importNewPackage = """$importTarget
+import com.c51.feature.${argPackageName}.${activityName}Activity
+"""
+
+
+    def newFileContent = file.text.replace(constTarget, deeplinkName)
+    newFileContent = newFileContent.replace(mapTarget, mapNewNode)
+    newFileContent = newFileContent.replace(importTarget, importNewPackage)
+
+    def destFile = new File("../../../../output/AppRoute.kt")
+    destFile.createNewFile()
+    destFile.write(newFileContent)
+}
+
+// TODO 1. "//Insert1" need to be added to the AppSubRoute
+//
