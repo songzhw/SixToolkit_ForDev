@@ -1,5 +1,8 @@
 package ca.six.tools
 
+// 1. 坑1: 替换时, 若target里有hashMap<A, B>这样的<>, 或是有[], 这样都会替换失败. 说找不到这样的regex.
+//      所以没办法, 我只好使用了"//INSERT1"这样的固定坑位了
+
 // get arguments from command-line
 String[] arguments = this.args
 
