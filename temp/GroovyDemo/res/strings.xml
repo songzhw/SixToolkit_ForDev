@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <resources>
     <string name="app_name">Advanced2021</string>
     <string name="app_id">20221212</string>
+    <string name="description">hello world</string>
 </resources>
