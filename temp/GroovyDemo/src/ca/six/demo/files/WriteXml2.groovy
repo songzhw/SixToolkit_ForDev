@@ -1,11 +1,16 @@
 package ca.six.demo.files
 
+import groovy.xml.Namespace
 import groovy.xml.XmlSlurper
 import groovy.xml.XmlUtil
 import groovy.xml.slurpersupport.GPathResult
 
+
 File xmlFile = new File("../../../../../res/AndroidManifest.xml")
 GPathResult manifest = new XmlSlurper().parse(xmlFile)
+manifest.declareNamespace(
+        android: "http://schemas.android.com/apk/res/android"
+)
 
 /*
 <activity android:name=".biz.home.HomeActivity"
