@@ -7,7 +7,7 @@ import groovy.xml.slurpersupport.GPathResult
 File xmlFile = new File("../../../../../res/AndroidManifest.xml")
 GPathResult manifest = new XmlSlurper().parse(xmlFile)
 
-
+manifest.@"xmlns:android" = "http://schemas.android.com/apk/res/android"
 manifest.application.appendNode{
     foo(
             bar: "1234abc",
