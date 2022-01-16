@@ -20,4 +20,8 @@ manifest.application.appendNode{
     )
 }
 
-println XmlUtil.serialize(manifest)
+//def fileWriter = new FileWriter("../../../../../res/AndroidManifest.xml")
+//XmlUtil.serialize(manifest, fileWriter)
+xmlFile.withWriter {writer ->
+    XmlUtil.serialize(manifest, writer)
+}
