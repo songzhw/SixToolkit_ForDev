@@ -14,11 +14,15 @@ manifest222.declareNamespace(
 // list all the permissions
 manifest222."uses-permission".each { p -> println p."@android:name" }
 
-// list activities's path
+// 读取子结点, 直接写上名字就行
+// 读取属性, 那就要在属性名字前加@
+// 读取内容, 就要用 text()
+// list activities' path
 String pkg = manifest222."@package"  //=> ca.six.demo.advanced2021
 manifest222.application.activity.each { actv ->
     String actvName = actv."@android:name"
     println "activity = ${pkg}${actvName}"
 }
+
 
 
