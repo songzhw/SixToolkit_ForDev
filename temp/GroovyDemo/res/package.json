@@ -1,0 +1,66 @@
+{
+  "name": "RN101",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios --simulator='iPhone 13'",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "skipSnapshot": "node scripts/skipSnapshot.js"
+  },
+  "dependencies": {
+    "@react-native-community/masked-view": "^0.1.6",
+    "easy-peasy": "^5.0.3",
+    "i18next": "^19.8.4",
+    "react": "16.13.1",
+    "react-i18next": "^11.8.5",
+    "react-native": "0.63.4",
+    "react-native-fs": "^2.16.6",
+    "react-native-gesture-handler": "^1.8.0",
+    "react-native-mail": "^6.1.1",
+    "react-native-model": "^1.0.5",
+    "react-native-safe-area-context": "3.1.1",
+    "react-native-screens": "^2.0.0",
+    "react-native-svg": "12.1.0",
+    "react-native-view-shot": "^3.1.2",
+    "react-native-webview": "^11.6.4",
+    "react-native-zip-archive": "^5.0.0",
+    "react-navigation": "^4.1.0",
+    "react-navigation-stack": "^2.1.0",
+    "react-navigation-tabs": "^2.7.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/runtime": "^7.8.4",
+    "@react-native-community/eslint-config": "^1.1.0",
+    "@types/i18next": "^13.0.0",
+    "@types/jest": "^25.2.3",
+    "@types/react-i18next": "^8.1.0",
+    "@types/react-native": "^0.63.2",
+    "@types/react-native-modal": "^4.1.1",
+    "@types/react-test-renderer": "^16.9.2",
+    "@types/react-native-mail": "^6.0.1",
+    "babel-jest": "^25.1.0",
+    "eslint": "^6.5.1",
+    "jest": "^25.1.0",
+    "jest-circus": "^26.6.3",
+    "metro-config": "^0.64.0",
+    "metro-react-native-babel-preset": "^0.59.0",
+    "react-native-svg-transformer": "^0.14.3",
+    "react-test-renderer": "16.13.1",
+    "typescript": "^3.8.3"
+  },
+  "jest": {
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
+}
