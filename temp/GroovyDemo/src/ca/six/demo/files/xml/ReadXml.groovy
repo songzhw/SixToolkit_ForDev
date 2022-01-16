@@ -1,10 +1,10 @@
-package ca.six.demo.files
+package ca.six.demo.files.xml
 
 import groovy.xml.Namespace
 import groovy.xml.XmlSlurper
 import groovy.xml.slurpersupport.GPathResult
 
-File xmlFile = new File("../../../../../res/AndroidManifest.xml")
+File xmlFile = new File("../../../../../../res/AndroidManifest.xml")
 // GPath, in certain ways, is similar to XPath (that is used for querying XML data)
 GPathResult manifest222 = new XmlSlurper().parse(xmlFile)
 manifest222.declareNamespace(

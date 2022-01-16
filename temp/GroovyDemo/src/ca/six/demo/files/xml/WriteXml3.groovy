@@ -1,13 +1,15 @@
-package ca.six.demo.files
+package ca.six.demo.files.xml
 
 import groovy.xml.XmlSlurper
 import groovy.xml.XmlUtil
 import groovy.xml.slurpersupport.GPathResult
 
-File xmlFile = new File("../../../../../res/AndroidManifest.xml")
+File xmlFile = new File("../../../../../../res/AndroidManifest.xml")
 GPathResult manifest = new XmlSlurper().parse(xmlFile)
 
-manifest.@"xmlns:android" = "http://schemas.android.com/apk/res/android"
+// 加了这金三顺就会说是NPE, 我晕
+// manifest.@"xmlns:android" = "http://schemas.android.com/apk/res/android"
+
 manifest.application.appendNode{
     foo(
             bar: "1234abc",

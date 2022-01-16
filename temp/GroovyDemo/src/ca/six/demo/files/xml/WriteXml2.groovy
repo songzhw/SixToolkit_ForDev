@@ -1,4 +1,4 @@
-package ca.six.demo.files
+package ca.six.demo.files.xml
 
 import groovy.xml.Namespace
 import groovy.xml.XmlSlurper
@@ -6,7 +6,7 @@ import groovy.xml.XmlUtil
 import groovy.xml.slurpersupport.GPathResult
 
 // android这个space分散得到处都是, 这明显不好! 跟现有androidManifest不一样!!!
-File xmlFile = new File("../../../../../res/AndroidManifest.xml")
+File xmlFile = new File("../../../../../../res/AndroidManifest.xml")
 GPathResult manifest = new XmlSlurper().parse(xmlFile)
 manifest.declareNamespace(
         android: "http://schemas.android.com/apk/res/android"

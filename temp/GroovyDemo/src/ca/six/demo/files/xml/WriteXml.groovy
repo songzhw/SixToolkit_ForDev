@@ -1,10 +1,10 @@
-package ca.six.demo.files
+package ca.six.demo.files.xml
 
 import groovy.xml.XmlSlurper
 import groovy.xml.XmlUtil
 import groovy.xml.slurpersupport.GPathResult
 
-File xmlFile = new File("../../../../../res/AndroidManifest.xml")
+File xmlFile = new File("../../../../../../res/AndroidManifest.xml")
 GPathResult manifest = new XmlSlurper().parse(xmlFile)
 
 manifest.appendNode{
