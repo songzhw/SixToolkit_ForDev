@@ -4,7 +4,9 @@ import groovy.xml.XmlSlurper
 import groovy.xml.slurpersupport.GPathResult
 
 File xmlFile = new File("../../../../../res/AndroidManifest.xml")
+// GPath, in certain ways, is similar to XPath (that is used for querying XML data)
 GPathResult manifest222 = new XmlSlurper().parse(xmlFile)
+
 
 // list all the permissions
 manifest222."uses-permission".each { p -> println p."@android:name" }
