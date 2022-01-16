@@ -5,7 +5,7 @@ import groovy.xml.XmlSlurper
 import groovy.xml.XmlUtil
 import groovy.xml.slurpersupport.GPathResult
 
-
+// android这个space分散得到处都是, 这明显不好! 跟现有androidManifest不一样!!!
 File xmlFile = new File("../../../../../res/AndroidManifest.xml")
 GPathResult manifest = new XmlSlurper().parse(xmlFile)
 manifest.declareNamespace(
