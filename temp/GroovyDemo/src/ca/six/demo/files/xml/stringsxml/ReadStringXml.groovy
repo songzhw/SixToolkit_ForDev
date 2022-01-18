@@ -21,3 +21,8 @@ GPathResult resources = new XmlSlurper().parse(xmlFile)
 resources.string.each {
     println "key = ${it.@name}, value = ${it.text()}"
 }
+/*
+key = app_name, value = Advanced2021
+key = app_id, value = 20221212
+key = description, value = hello world
+ */
