@@ -40,6 +40,8 @@ book.metaClass.methods.each { println "method : $it"}
 method : public long ca.six.demo.meta.Book.getId()
 method : public int ca.six.demo.meta.Book.getPages()
 method : public void ca.six.demo.meta.Book.setAuthor(ca.six.demo.meta.Author)
+method : public void ca.six.demo.meta.Book.attachReview(java.lang.String)
+method : public int ca.six.demo.meta.Book.getShelfPosition()
 ...
 method : public groovy.lang.MetaClass ca.six.demo.meta.Book.getMetaClass()
 method : public void ca.six.demo.meta.Book.setMetaClass(groovy.lang.MetaClass)
@@ -48,6 +50,8 @@ method : public void ca.six.demo.meta.Book.setMetaClass(groovy.lang.MetaClass)
 一个是成员们会自动生成getter, setter方法
 二是有getMetaClass()方法, setMetaClass()方法
  */
-
+println book.respondsTo("fetchData")  //=> []
+println book.respondsTo("attachReview") //=> [public void ca.six.demo.meta.Book.attachReview(java.lang.String)]
+println book.respondsTo("attachReview", String) //=> [public void ca.six.demo.meta.Book.attachReview(java.lang.String)]
 
 
