@@ -37,7 +37,11 @@ class MemoDSL {
     }
 }
 
-MemoDSL.make {
+def myTable(closure){
+    MemoDSL.make(closure)
+}
+
+myTable {
     table {
         tr {
             td "one"
