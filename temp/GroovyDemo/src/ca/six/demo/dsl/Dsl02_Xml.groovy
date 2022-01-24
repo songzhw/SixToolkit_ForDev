@@ -14,12 +14,14 @@ class MemoDSL {
         println result
     }
 
-    def table(arg){
-        result += "table, "
+    def table(closure){
+        result += "table< "
+        closure()
+        result += " >"
     }
 
-    def td(arg) {
-        result += "td"
+    def td(text) {
+        result += "td($text), "
     }
 
     def methodMissing(String methodName, args) {
