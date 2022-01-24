@@ -14,10 +14,16 @@ class MemoDSL {
         println result
     }
 
-    def table(closure){
+    def table(closure) {
         result += "table< "
         closure()
-        result += " >"
+        result += ">"
+    }
+
+    def tr(closure) {
+        result += "tr["
+        closure()
+        result += "], "
     }
 
     def td(text) {
@@ -33,8 +39,13 @@ class MemoDSL {
 
 MemoDSL.make {
     table {
-        td "one"
-        td "two"
+        tr {
+            td "one"
+            td "two"
+        }
+        tr {
+            td "twenty"
+        }
     }
     printSelf()
-}
+} //=> table< tr[td(one), td(two), ], tr[td(twenty), ], >
