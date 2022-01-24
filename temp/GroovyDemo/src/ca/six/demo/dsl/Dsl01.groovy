@@ -16,37 +16,7 @@ def ret = obj.with {
 }
 println ret //=> 23
 /*
-[比较下kotin中的操作符]
-
-1. T.let( block: (T) -> R) : R, 即参数是T, 但返回的是lambda最后一行
-player.let {
-    it.setQuality(1080p)
-    it.setMute(false)
-} //=> 这里返回的lambda最后一行
-
-2. with与let几乎是一样的, 只是成了: with(T) {..},  并且lambda中也可以使用T
-源码: with(receiver: T, block: T.()->R) : R
-例子:
-with(player) {
-    setQuality(1080p)
-    setMute(false)
-}
-
-3. run与with类似, 只不过:
-player.run {
-    setQuality(1080p)
-    setMute(false)
-}
-
-4. apply则是返回的T
-val playerClone = player.apply {
-    setQuality(1080p)
-    setMute(false)
-}
-
-6. also类似let, 但返回值是T自己
-val playerClone = player.also {
-    it.setQuality(1080p)
-    it.setMute(false)
-}
+kotlin中, (T)->R, 以及T.()->R是不一样的. 主要是lambda参数是不是this
+而在groovy中, 这两者是一样的, 你加不加it都可以!
+=> 因为groovy中的obj.with{}, 就类似于Kotlin中的 obj.let{it->}, 或是obj.run{}了!
  */
