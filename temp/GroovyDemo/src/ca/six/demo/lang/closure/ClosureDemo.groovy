@@ -31,3 +31,26 @@ c7("great") //=> 0, great
 def c8 = { String id = "-1", String name = "me" -> println "$id, $name" }
 c8("one") //=> one, me
 // groovy不像kotlin一样, 有 c8(name="szw")这样的功能, 所以只能用c8("-1", "szw")了
+
+
+// curried parameters
+def chinese = { style, meat, vegetable ->
+    "$style ($meat, $vegetable)"
+}
+
+// curry之后, 即第一参style已经被填好了
+def chuang = chinese.curry("四川菜")
+// 同样, 第二参style也搞定了
+def chicken = chuang.curry("鸡肉")
+
+println chicken("花生") //=> 四川菜 (鸡肉, 花生)
+println chuang("猪肉", "大蒜叶子") //=> 四川菜 (猪肉, 大蒜叶子)
+
+
+// closure
+def wrapper(fn){
+    def id = 0
+    // inner method is not supported
+    def innerFn() {}
+
+}
