@@ -48,9 +48,18 @@ println chuang("猪肉", "大蒜叶子") //=> 四川菜 (猪肉, 大蒜叶子)
 
 
 // closure
-def wrapper(fn){
+def wrapperFn(fn) {
     def id = 0
-    // inner method is not supported
-    def innerFn() {}
-
+    def innerFn = {
+        id++
+        fn.call(id)
+    }
+    return innerFn
 }
+
+def wrapper = wrapperFn { println it }
+wrapper() //=> 1
+wrapper() //=> 2
+wrapper() //=> 3
+println wrapper.id // 访问不到, 因为Closure对象没这方法. 这个"id"只是具体某一闭包中的局部变量而已
+
