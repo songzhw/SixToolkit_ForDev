@@ -61,5 +61,31 @@ def wrapper = wrapperFn { println it }
 wrapper() //=> 1
 wrapper() //=> 2
 wrapper() //=> 3
-println wrapper.id // 访问不到, 因为Closure对象没这方法. 这个"id"只是具体某一闭包中的局部变量而已
+// println wrapper.id // 访问不到, 因为Closure对象没这方法. 这个"id"只是具体某一闭包中的局部变量而已
+
+
+class Closure01 {
+    def closure = {
+        println this.class.name  //=> Closure01
+        println owner.class.name //=> Closure01
+        println delegate.class.name //=> Closure01  ||  设置了delegate=this后, 这值就成了ClosureDemo
+
+        def inner = {
+            println this.class.name //=> Closure01
+            println owner.class.name //=> Closure01$_closure1
+            println delegate.class.name //=> Closure01$_closure1
+        }
+        println "=================="
+        inner()
+    }
+}
+
+println "====================="
+def obj = new Closure01()
+def c = obj.closure
+c()
+
+println "================"
+c.delegate = this
+c()
 
