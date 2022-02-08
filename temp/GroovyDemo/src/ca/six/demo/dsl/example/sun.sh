@@ -6,3 +6,6 @@ String.metaClass.search = {c ->
 }
 
 "szw".search() //=> hi szw
+
+def shell = new GroovyShell()
+shell.evaluate(new File("Moon.groovy"))
