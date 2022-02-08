@@ -1,4 +1,4 @@
-package ca.six.demo.dsl.example
+package ca.six.demo.dsl.example.scripts
 
 // 之所以是abstract是因为我们没有实现它的run()方法
 abstract class SunScript extends Script {

@@ -1,4 +1,4 @@
-package ca.six.demo.dsl.example
+package ca.six.demo.dsl.example.scripts
 
 class Mars {
     def mars() {

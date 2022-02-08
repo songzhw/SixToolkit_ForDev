@@ -17,7 +17,10 @@ args.setProperty("id", 23)
 def shell = new GroovyShell(args)
 shell.evaluate(new File("Moon.groovy"))
 
+/*
+// 这里报错, 说找不到SunScript
 CompilerConfiguration config = new CompilerConfiguration()
 config.setScriptBaseClass("SunScript")
 def shell2 = new GroovyShell(config)
 shell2.evaluate(new File("myDSL.groovy"))
+*/
