@@ -7,5 +7,8 @@ String.metaClass.search = {c ->
 
 "szw".search() //=> hi szw
 
-def shell = new GroovyShell()
+def args = new Binding()
+args.setProperty("name", "szw")
+args.setProperty("id", 23)
+def shell = new GroovyShell(args)
 shell.evaluate(new File("Moon.groovy"))
