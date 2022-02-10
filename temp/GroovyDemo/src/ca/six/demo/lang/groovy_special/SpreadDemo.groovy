@@ -2,4 +2,8 @@ package ca.six.demo.lang.groovy_special
 
 import ca.six.demo.Box
 
-Box.apples*.name.each { println it }
+// spread operator
+Box.apples*.name.each { println it } //=> one, two, three
+
+// GPath
+Box.apples.id.each {println it} //=> 1, 2, 3
