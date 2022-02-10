@@ -6,4 +6,7 @@ import ca.six.demo.Box
 Box.apples*.name.each { println it } //=> one, two, three
 
 // GPath
-Box.apples.id.each {println it} //=> 1, 2, 3
+Box.apples.id.each { println it } //=> 1, 2, 3
+
+ArrayList maps = [  ["a": 1, "b": 2]  ,   ["a": "一", "b": "二"]  ]
+maps.a.each { println it } //=> 1, "一"
